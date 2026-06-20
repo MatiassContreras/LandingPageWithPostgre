@@ -23,3 +23,19 @@ export async function POST(request: Request) {
 
   return Response.json(rows[0], { status: 201 })
 }
+
+// PUT — modificar el estado de una tarea
+export async function PUT(request: Request) {
+  const { id, nuevoEstado } = await request.json()
+
+  if (!id) {
+    return Response.json({ error: "El id es requerido" }, { status: 400 })
+  }
+
+  const { rows } = await pool.query(
+    "UPDATE tareas SET completada = $2 WHERE id = $1 RETURNING *",
+    [id, nuevoEstado]
+  )
+
+  return Response.json(rows[0])
+}

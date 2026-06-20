@@ -3,25 +3,25 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-export default function FormularioTarea() {
+export default function ModificarTarea() {
   const [id, setId] = useState(0)
   const [nuevoEstado, setNuevoEstado] = useState(false)
   const [cargando, setCargando] = useState(false)
   const router = useRouter()
 
   async function handleSubmit() {
-    if (id==0) return
+    if (id === 0) return
 
     setCargando(true)
 
-    await fetch("/api/modtareas", {
-      method: "POST",
+    await fetch("/api/tareas", {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, nuevoEstado }),
     })
 
     setCargando(false)
-    router.refresh() // refresca la página para mostrar la nueva tarea
+    router.refresh()
   }
 
   return (
@@ -29,7 +29,7 @@ export default function FormularioTarea() {
       <input
         type="number"
         value={id}
-        onChange={(e) => setId(parseInt(e.target.value || '0', 10) || 0)}
+        onChange={(e) => setId(parseInt(e.target.value || "0", 10) || 0)}
         placeholder="ID de la tarea a modificar..."
         className="border rounded p-2 flex-1"
       />

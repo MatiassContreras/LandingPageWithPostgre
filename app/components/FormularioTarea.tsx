@@ -13,7 +13,7 @@ export default function FormularioTarea() {
 
     setCargando(true)
 
-    await fetch("/api/addtareas", {
+    await fetch("/api/tareas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ titulo }),
@@ -21,7 +21,7 @@ export default function FormularioTarea() {
 
     setTitulo("")
     setCargando(false)
-    router.refresh() // refresca la página para mostrar la nueva tarea
+    router.refresh()
   }
 
   return (
