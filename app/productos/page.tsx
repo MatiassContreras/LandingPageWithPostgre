@@ -2,7 +2,7 @@ import pool from "@/lib/db"
 import ProductoCard from "../components/ProductCard"
 import ProductosUsuario from "../components/ProductosUsuario"
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
-
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Productos - Zaragoza II",
