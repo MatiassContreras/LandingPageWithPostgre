@@ -7,6 +7,22 @@ type Producto = {
   stock: number
 }
 
+async function comprar(productoId: number) {
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      items: [{ producto_id: productoId, cantidad: 1 }],
+    }),
+  })
+
+  const data = await res.json()
+
+  if (data.checkoutUrl) {
+    window.location.href = data.checkoutUrl  // ← redirige a Mercado Pago
+  }
+}
+
 export default function UserProductoCard({
   producto,
   onCambio,
@@ -27,7 +43,7 @@ export default function UserProductoCard({
             <h3 className="ap-card-nombre">{producto.nombre}</h3>
             <p className="ap-card-precio">${Number(producto.precio).toFixed(2)}</p>
             <p className="ap-card-stock">Stock: {producto.stock}</p>
-             <button className="ap-btn-edit" onClick={() => {}}>
+             <button className="ap-btn-edit" onClick={() => comprar(producto.id)}>
               Comprar
             </button>
           </div>
