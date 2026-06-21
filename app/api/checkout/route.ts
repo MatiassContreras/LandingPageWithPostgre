@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   const { items } = await request.json()
   // items = [{ producto_id: 1, cantidad: 2 }, { producto_id: 3, cantidad: 1 }]
-
+  
   // 1. Traemos los productos reales de la BD (nunca confiar en precios del frontend)
   const ids = items.map((i: any) => i.producto_id)
   const { rows: productos } = await pool.query(
@@ -19,6 +19,9 @@ export async function POST(request: Request) {
     [ids]
   )
 
+  if(items.cantidad === 0){
+    return Response.json({ error: "No se pueden comprar 0 productos" }, { status: 400 })
+  }
   // 2. Armamos el total y los items para Mercado Pago
   let total = 0
   const mpItems = items.map((item: any) => {

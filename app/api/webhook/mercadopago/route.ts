@@ -5,7 +5,6 @@ import { MercadoPagoConfig, Payment } from "mercadopago"
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN! })
 const paymentClient = new Payment(client)
 
-// Mercado Pago a veces hace una verificación inicial con GET
 export async function GET() {
   return Response.json({ ok: true })
 }
