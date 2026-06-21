@@ -59,7 +59,7 @@ export async function POST(request: Request) {
         pending: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/pendiente`,
       },
       auto_return: "approved",
-      notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhook/mercadopago`,
+      //notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhook/mercadopago`,
     },
   })
 
