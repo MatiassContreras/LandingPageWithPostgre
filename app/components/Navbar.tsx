@@ -24,8 +24,8 @@ export default function Navbar({ sesion }: { sesion: Sesion }) {
       <ul className={`zn-links ${abierto ? "zn-links-open" : ""}`}>
         <li><Link href="/" onClick={() => setAbierto(false)}>Inicio</Link></li>
         <li><Link href="/productos" onClick={() => setAbierto(false)}>Productos</Link></li>
-        <li><Link href="https://www.youtube.com/watch?v=UbSDCb_n40Y" onClick={() => setAbierto(false)}>Locales</Link></li>
-        <li><Link href="https://www.youtube.com/watch?v=UbSDCb_n40Y" onClick={() => setAbierto(false)}>Nosotros</Link></li>
+        <li><Link href="/locales" onClick={() => setAbierto(false)}>Locales</Link></li>
+        <li><Link href="" onClick={() => setAbierto(false)}>Nosotros</Link></li>
 
         {sesion?.admin && (
           <li><Link href="/admin" onClick={() => setAbierto(false)}>Administrar</Link></li>
