@@ -1,5 +1,6 @@
 import pool from "@/lib/db"
 import { cookies } from "next/headers"
+import global from "./globals.css"
 
 export default async function CarritoPage() {
   const cookieStore = await cookies()
