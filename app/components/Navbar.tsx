@@ -27,6 +27,12 @@ export default function Navbar({ sesion }: { sesion: Sesion }) {
         <li><Link href="/locales" onClick={() => setAbierto(false)}>Locales</Link></li>
         <li><Link href="" onClick={() => setAbierto(false)}>Nosotros</Link></li>
 
+        {sesion ? (
+          <li><Link href="/carrito" onClick={() => setAbierto(false)} >Carrito</Link></li>
+        ):
+        null 
+        }
+
         {sesion?.admin && (
           <li><Link href="/admin" onClick={() => setAbierto(false)}>Administrar</Link></li>
         )}
