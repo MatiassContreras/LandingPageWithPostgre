@@ -1,11 +1,20 @@
 import pool from "@/lib/db"
 import { cookies } from "next/headers"
+import { getSesion } from "@/lib/session"
+import { redirect } from "next/navigation"
+import { Metadata } from "next"
 import global from "./globals.css"
 
-export default async function CarritoPage() {
+export default async function Carrito() {
   const cookieStore = await cookies()
   const actual = cookieStore.get("carrito")?.value
   const carrito = actual ? JSON.parse(actual) : []
+  const sesion = await getSesion()
+
+ if (!sesion) {
+    window.alert("Necesitas iniciar sesion para esta pestaña!")
+    redirect("/")
+  }
 
   if (carrito.length === 0) {
     return <p className="ap-cart-empty">Tu carrito está vacío</p>
