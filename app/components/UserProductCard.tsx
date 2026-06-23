@@ -8,21 +8,7 @@ type Producto = {
   stock: number
 }
 
-async function comprar(productoId: number) {
-  const res = await fetch("/api/checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      items: [{ producto_id: productoId, cantidad: 1 }],
-    }),
-  })
 
-  const data = await res.json()
-
-  if (data.checkoutUrl) {
-    window.location.href = data.checkoutUrl  // ← redirige a Mercado Pago
-  }
-}
 
 export default function UserProductoCard({
   producto,

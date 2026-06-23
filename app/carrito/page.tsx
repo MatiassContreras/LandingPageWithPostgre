@@ -4,14 +4,25 @@ import { getSesion } from "@/lib/session"
 import { redirect } from "next/navigation"
 import { Metadata } from "next"
 import global from "./globals.css"
+import Comprar from "../components/ComprarBoton"
 
 export default async function Carrito() {
   const cookieStore = await cookies()
   const actual = cookieStore.get("carrito")?.value
   const carrito = actual ? JSON.parse(actual) : []
   const sesion = await getSesion()
+ 
 
- if (!sesion) {
+  type ItemCarrito = {
+    producto_id: number
+    cantidad: number
+  }
+   const prod: ItemCarrito[] = carrito.map((item: any) => ({
+    producto_id: item.producto_id,
+    cantidad: item.cantidad,
+  }))
+
+  if (!sesion) {
     window.alert("Necesitas iniciar sesion para esta pestaña!")
     redirect("/")
   }
@@ -26,9 +37,11 @@ export default async function Carrito() {
     "SELECT * FROM productos WHERE id = ANY($1)",
     [ids]
   )
-
+  let i: number = 0
   return (
-    <ul className="ap-cart-list">
+    <div>
+      <ul className="ap-cart-list">
+      
       {carrito.map((item: any) => {
         const producto = productos.find((p) => p.id === item.producto_id)
         if (!producto) return null
@@ -55,5 +68,9 @@ export default async function Carrito() {
         )
       })}
     </ul>
+      <Comprar items={prod}></Comprar>
+
+    </div>
+
   )
 }
